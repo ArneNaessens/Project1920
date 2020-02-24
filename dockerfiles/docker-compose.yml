@@ -43,3 +43,11 @@ mosquitto:
       - /srv/docker/mosquitto/data:/mosquitto/data
 #      - /srv/docker/mosquitto/config:/mosquitto/config
       - /srv/docker/mosquitto/log:/mosquitto/log
+
+telegraf:
+    container_name: telegraf
+    image: telegraf
+    restart: unless-stopped
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf
+      - /var/run/docker.sock:/var/run/docker.sock
