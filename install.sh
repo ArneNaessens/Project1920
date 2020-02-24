@@ -7,6 +7,7 @@ function command_exists() {
 mainmenu_selection=$(whiptail --title "Main Menu" --menu --notags \
 	"" 20 78 12 -- \
 	"docker" "Install Docker" \
+	"installreq" "Install required packages" \
 	"commands" "Docker commands" \
 	3>&1 1>&2 2>&3)
 case $mainmenu_selection in
@@ -30,5 +31,10 @@ case $mainmenu_selection in
 		sudo reboot
 	fi
 ;;
+
+"installreq")
+	echo "hallo"
+;;
+
 *) ;;
 esac
