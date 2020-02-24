@@ -5,6 +5,8 @@ grafana:
     user: "0"
     ports:
       - 3000:3000
+    links:
+      - influxdb
     volumes:
       - /srv/docker/grafana/data:/var/lib/grafana
 
@@ -48,6 +50,9 @@ telegraf:
     container_name: telegraf
     image: telegraf
     restart: unless-stopped
+    links:
+      - influxdb
+      - mosquitto
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf
       - /var/run/docker.sock:/var/run/docker.sock
