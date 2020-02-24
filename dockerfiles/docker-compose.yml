@@ -19,14 +19,27 @@ portainer:
       - /var/run/docker.sock:/var/run/docker.sock
 
 influxdb:
-   container_name: influxdb
-   image: influxdb
-   ports:
+    container_name: influxdb
+    image: influxdb
+    restart: unless-stopped
+    ports:
       - 8086:8086
-   volumes:
-     - /srv/docker/influxdb/data:/var/lib/influxdb
-   environment:
-     - INFLUXDB_DB=weatherstation
-     - INFLUXDB_HTTP_AUTH_ENABLED=true
-     - INFLUXDB_ADMIN_USER=admin
-     - INFLUXDB_ADMIN_PASSWORD=project1920
+    volumes:
+      - /srv/docker/influxdb/data:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=weatherstation
+      - INFLUXDB_HTTP_AUTH_ENABLED=true
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=project1920
+
+mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - /srv/docker/mosquitto/data:/mosquitto/data
+#      - /srv/docker/mosquitto/config:/mosquitto/config
+      - /srv/docker/mosquitto/log:/mosquitto/log
