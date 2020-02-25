@@ -1,0 +1,37 @@
+esphome:
+  name: esp_01_1
+  platform: ESP8266
+  board: nodemcu
+
+wifi:
+  ssid: "IoT"
+  password: "password"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esp 01 1 Fallback Hotspot"
+    password: "Azerty123"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+mqtt:
+  broker: 178.119.38.101
+
+sensor:
+  - platform: dht
+    pin: GPIO2
+    temperature:
+      name: "Temperature"
+    humidity:
+      name: "Humidity"
+    update_interval: 5s
+    model: DHT11
+
+web_server:
+  port: 80
+
+ota:
