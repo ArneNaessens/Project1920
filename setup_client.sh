@@ -7,10 +7,10 @@ function command_exists() {
 
 echo "Installing required items"
 if command_exists git; then
-		echo "required items installed"
+		echo "Required items installed"
 	else
 		echo "Installing git"
-		sudo apt-get install git
+		sudo apt-get install git git-core
 fi
 
 
@@ -26,7 +26,7 @@ case $mainmenu_selection in
 	
     echo "Installing RTL SDR packages"
     cd ~
-    sudo apt-get install git git-core cmake libusb-1.0-0-dev build-essential
+	sudo apt-get install cmake libusb-1.0-0-dev build-essential
     git clone git://git.osmocom.org/rtl-sdr.git
     cd rtl-sdr/ && mkdir build && cd build/
     cmake ../ -DINSTALL_UDEV_RULES=ON
@@ -35,7 +35,7 @@ case $mainmenu_selection in
     sudo ldconfig
     cd ~
     sudo cp ./rtl-sdr/rtl-sdr.rules /etc/udev/rules.d/
-    "blacklist dvb_usb_rtl28xxu
+    sudo "blacklist dvb_usb_rtl28xxu
     blacklist rtl2832
     blacklist rtl2830" >> /etc/modprobe.d/no-rtl.conf
 
