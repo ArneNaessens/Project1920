@@ -33,7 +33,8 @@ case $mainmenu_selection in
 ;;
 
 "installreq")
-	echo "hallo"
+	cd dockerfiles/
+	docker-compose up -d
 ;;
 
 *) ;;

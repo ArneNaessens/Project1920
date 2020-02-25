@@ -9,6 +9,8 @@ grafana:
       - influxdb
     volumes:
       - /srv/docker/grafana/data:/var/lib/grafana
+    environment:
+      - GF_INSTALL_PLUGINS=fatcloud-windrose-panel
 
 portainer:
     container_name: portainer
