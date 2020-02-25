@@ -32,6 +32,18 @@ case $mainmenu_selection in
 	fi
 ;;
 
+"commands")
+	docker_selection=$(
+		whiptail --title "Docker commands" --menu --notags \
+			"Shortcut to common docker commands" 20 78 12 -- \
+			"start" "Start all containers" \
+			"restart" "Restart all containers" \
+			"stop" "Stop all containers" \
+			"pull" "Update all containers" \
+			3>&1 1>&2 2>&3
+	)
+;;
+
 "installreq")
 	cd dockerfiles/
 	docker-compose up -d
