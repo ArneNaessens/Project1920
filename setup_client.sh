@@ -6,9 +6,12 @@ function command_exists() {
 
 
 echo "Installing required items"
-
-sudo apt-get install git
-
+if command_exists git; then
+		echo "required items installed"
+	else
+		echo "Installing git"
+		sudo apt-get install git
+fi
 
 
 mainmenu_selection=$(whiptail --title "Main Menu" --menu --notags \
