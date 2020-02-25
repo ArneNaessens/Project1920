@@ -35,13 +35,38 @@ case $mainmenu_selection in
 "commands")
 	docker_selection=$(
 		whiptail --title "Docker commands" --menu --notags \
-			"Shortcut to common docker commands" 20 78 12 -- \
+			"Usefull docker commands" 20 78 12 -- \
 			"start" "Start all containers" \
 			"restart" "Restart all containers" \
 			"stop" "Stop all containers" \
-			"pull" "Update all containers" \
-			3>&1 1>&2 2>&3
-	)
+			"update" "Update all containers" \
+			3>&1 1>&2 2>&3)
+	case $dcoker_selection in
+	"start")
+		cd dockerfiles/
+		docker-compose up -d
+	"restart")
+		cd dockerfiles/
+		docker-compose restart
+	"stop")
+		docker-compose down
+	"update")
+		echo "Stopping containers"
+		docker-compose down
+
+		echo "Downloading latest images"
+		docker-compose pull
+
+		echo "Building images"
+		docker-compose build
+
+		echo "Starting containers"
+		docker-compose up -d
+
+		echo "Done updating"
+;;
+
+
 ;;
 
 "installreq")
