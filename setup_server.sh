@@ -68,7 +68,7 @@ case $mainmenu_selection in
 
 		echo "Done updating"
 	;;
-
+	esac
 ;;
 
 "installreq")
