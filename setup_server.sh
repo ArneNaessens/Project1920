@@ -45,11 +45,14 @@ case $mainmenu_selection in
 	"start")
 		cd dockerfiles/
 		docker-compose up -d
+	;;
 	"restart")
 		cd dockerfiles/
 		docker-compose restart
+	;;
 	"stop")
 		docker-compose down
+	;;
 	"update")
 		echo "Stopping containers"
 		docker-compose down
@@ -64,6 +67,7 @@ case $mainmenu_selection in
 		docker-compose up -d
 
 		echo "Done updating"
+	;;
 ;;
 
 
