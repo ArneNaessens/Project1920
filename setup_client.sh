@@ -15,10 +15,11 @@ mainmenu_selection=$(whiptail --title "Main Menu" --menu --notags \
 	"" 20 78 12 -- \
 	"rtl_sdr" "Install RTL SDR support" \
 	"rtl_433" "Install required packages" \
+	"setting" "mqtt credentials" \
 	3>&1 1>&2 2>&3)
 
 case $mainmenu_selection in
-"docker")
+"rtl_sdr")
 	
     echo "Installing RTL SDR packages"
     cd ~
