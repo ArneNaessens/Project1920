@@ -58,3 +58,15 @@ telegraf:
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf
       - /var/run/docker.sock:/var/run/docker.sock
+
+prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    volumes:
+      - /srv/docker/prometheus/:/etc/prometheus/
+      #- /srv/docker/prometheus/config:/etc/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+#      - /srv/docker/prometheus/:/etc/prometheus/
