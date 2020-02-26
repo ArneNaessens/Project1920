@@ -1,72 +1,72 @@
 grafana:
-    container_name: grafana
-    image: grafana/grafana
-    restart: unless-stopped
-    user: "0"
-    ports:
-      - 3000:3000
-    links:
-      - influxdb
-    volumes:
-      - /srv/docker/grafana/data:/var/lib/grafana
-    environment:
-      - GF_INSTALL_PLUGINS=fatcloud-windrose-panel
+  container_name: grafana
+  image: grafana/grafana
+  restart: unless-stopped
+  user: "0"
+  ports:
+    - 3000:3000
+  links:
+    - influxdb
+  volumes:
+    - /srv/docker/grafana/data:/var/lib/grafana
+  environment:
+    - GF_INSTALL_PLUGINS=fatcloud-windrose-panel
 
 portainer:
-    container_name: portainer
-    image: portainer/portainer
-    restart: unless-stopped
-    ports:
-      - 9000:9000
-    volumes:
-      - /srv/docker/portainer/data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
+  container_name: portainer
+  image: portainer/portainer
+  restart: unless-stopped
+  ports:
+    - 9000:9000
+  volumes:
+    - /srv/docker/portainer/data:/data
+    - /var/run/docker.sock:/var/run/docker.sock
 
 influxdb:
-    container_name: influxdb
-    image: influxdb
-    restart: unless-stopped
-    ports:
-      - 8086:8086
-    volumes:
-      - /srv/docker/influxdb/data:/var/lib/influxdb
-    environment:
-      - INFLUXDB_DB=weatherstation
-      - INFLUXDB_HTTP_AUTH_ENABLED=true
-      - INFLUXDB_ADMIN_USER=admin
-      - INFLUXDB_ADMIN_PASSWORD=project1920
+  container_name: influxdb
+  image: influxdb
+  restart: unless-stopped
+  ports:
+    - 8086:8086
+  volumes:
+    - /srv/docker/influxdb/:/var/lib/influxdb/
+  environment:
+    - INFLUXDB_DB=weatherstation
+    - INFLUXDB_HTTP_AUTH_ENABLED=true
+    - INFLUXDB_ADMIN_USER=admin
+    - INFLUXDB_ADMIN_PASSWORD=project1920
 
 mosquitto:
-    container_name: mosquitto
-    image: eclipse-mosquitto
-    restart: unless-stopped
-    ports:
-      - 1883:1883
-      - 9001:9001
-    volumes:
-      - /srv/docker/mosquitto/data:/mosquitto/data
-#      - /srv/docker/mosquitto/config:/mosquitto/config/mosquitto.conf
-      - /srv/docker/mosquitto/log:/mosquitto/log
+  container_name: mosquitto
+  image: eclipse-mosquitto
+  restart: unless-stopped
+  ports:
+    - 1883:1883
+    - 9001:9001
+  volumes:
+    - /srv/docker/mosquitto/data:/mosquitto/data
+    #      - /srv/docker/mosquitto/config:/mosquitto/config/mosquitto.conf
+    - /srv/docker/mosquitto/log:/mosquitto/log
 
 telegraf:
-    container_name: telegraf
-    image: telegraf
-    restart: unless-stopped
-    links:
-      - influxdb
-      - mosquitto
-    volumes:
-      - ./telegraf.conf:/etc/telegraf/telegraf.conf
-      - /var/run/docker.sock:/var/run/docker.sock
+  container_name: telegraf
+  image: telegraf
+  restart: unless-stopped
+  links:
+    - influxdb
+    - mosquitto
+  volumes:
+    - ./telegraf.conf:/etc/telegraf/telegraf.conf
+    - /var/run/docker.sock:/var/run/docker.sock
 
 prometheus:
-    container_name: prometheus
-    image: prom/prometheus
-    restart: unless-stopped
-    ports:
-      - 9090:9090
-    volumes:
-      - /srv/docker/prometheus/:/etc/prometheus/
-      #- /srv/docker/prometheus/config:/etc/prometheus
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  container_name: prometheus
+  image: prom/prometheus
+  restart: unless-stopped
+  ports:
+    - 9090:9090
+  volumes:
+    - /srv/docker/prometheus/:/etc/prometheus/
+    #- /srv/docker/prometheus/config:/etc/prometheus
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
 #      - /srv/docker/prometheus/:/etc/prometheus/
