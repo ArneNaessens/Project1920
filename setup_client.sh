@@ -57,7 +57,7 @@ case $mainmenu_selection in
 	sudo apt-get install -y supervisor
 ;;
 
-"settings")
+"setting")
 	server=$(whiptail --inputbox "Input MQTT server remote ip address" 8 78 localhost --title "Remote Server" 3>&1 1>&2 2>&3)
 	username=$(whiptail --inputbox "Username for MQTT server" 8 78 admin --title "Username" 3>&1 1>&2 2>&3)
 	password=$(whiptail --passwordbox "please enter your secret password for MQTT server" 8 78 --title "password" 3>&1 1>&2 2>&3)
