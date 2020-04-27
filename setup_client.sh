@@ -19,6 +19,7 @@ mainmenu_selection=$(whiptail --title "Main Menu" --menu --notags \
 	"rtl_sdr" "Install RTL SDR support" \
 	"rtl_433" "Install required packages" \
 	"setting" "MQTT credentials" \
+	"startstop" "Start/stop service" \
 	3>&1 1>&2 2>&3)
 
 case $mainmenu_selection in
@@ -62,7 +63,7 @@ case $mainmenu_selection in
 	username=$(whiptail --inputbox "Username for MQTT server" 8 78 admin --title "Username" 3>&1 1>&2 2>&3)
 	password=$(whiptail --passwordbox "please enter your secret password for MQTT server" 8 78 --title "password" 3>&1 1>&2 2>&3)
 
-	echo "
+	sudo echo "
 	[program:rtl_433]
 	command=/home/pi/rtl_433/build/src/rtl_433 -R 123 -F “mqtt://${server}:1883,,user=”${username}”,pass=”${password}”,events=BEER”user=pi
 	autostart=yes
