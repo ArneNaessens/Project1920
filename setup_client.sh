@@ -18,7 +18,7 @@ mainmenu_selection=$(whiptail --title "Main Menu" --menu --notags \
 	"" 20 78 12 -- \
 	"rtl_sdr" "Install RTL SDR support" \
 	"rtl_433" "Install required packages" \
-	"setting" "mqtt credentials" \
+	"setting" "MQTT credentials" \
 	3>&1 1>&2 2>&3)
 
 case $mainmenu_selection in
@@ -44,28 +44,35 @@ case $mainmenu_selection in
 	fi
 ;;
 
-"commands")
-	docker_selection=$(
-		whiptail --title "Docker commands" --menu --notags \
-			"Shortcut to common docker commands" 20 78 12 -- \
-			"start" "Start all containers" \
-			"restart" "Restart all containers" \
-			"stop" "Stop all containers" \
-			"pull" "Update all containers" \
-			3>&1 1>&2 2>&3
-	)
+"rtl_433")
 
-	case $docker_selection in
-		"start") ./scripts/start.sh ;;
-		"stop") ./scripts/stop.sh ;;
-		"restart") ./scripts/restart.sh ;;
-		"pull") ./scripts/update.sh ;;
-	esac
+	echo "Installing rtl_433 package"
+	sudo apt-get install libtool libusb-1.0.0-dev librtlsdr-dev
+	rtl-sdr doxygen
+	git clone https://github.com/merbanan/rtl_433.git
+	cd rtl_433/ && mkdir build &&
+	cd build && cmake ../ &&
+	make
+	sudo make install
+	sudo apt-get install -y supervisor
 ;;
 
-"installreq")
-	cd dockerfiles/
-	docker-compose up -d
+"settings")
+	server=$(whiptail --inputbox "Input MQTT server remote ip address" 8 78 localhost --title "Remote Server" 3>&1 1>&2 2>&3)
+	username=$(whiptail --inputbox "Username for MQTT server" 8 78 admin --title "Username" 3>&1 1>&2 2>&3)
+	password=$(whiptail --passwordbox "please enter your secret password for MQTT server" 8 78 --title "password" 3>&1 1>&2 2>&3)
+
+	echo "
+	[program:rtl_433]
+	command=/home/pi/rtl_433/build/src/rtl_433 -R 123 -F “mqtt://${server}:1883,,user=”${username}”,pass=”${password}”,events=BEER”user=pi
+	autostart=yes
+	autorestart=yes
+	startretries=100
+	stderr_logfile=/var/log/rtl_433/rtl_433.err.log
+	stdout_logfile=/var/log/rtl_433/rtl_433.log
+	" >> /etc/supervisor/conf.d/rtl_433.conf
+	sudo mkdir /var/log/rtl_433
+	sudo service supervisor start
 ;;
 
 *) ;;
