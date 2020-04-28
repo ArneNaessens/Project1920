@@ -33,3 +33,7 @@ cd Project1920
 chmod +x setup_client.sh
 ./setup_client.sh
 ```
+
+### * Optional
+
+Remote sensor
