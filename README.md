@@ -12,6 +12,11 @@ Made by
 ## Instalation
 For this project you need two servers. We recommend to use an rasberry pi as client server.
 
+### Part list
+* raspberry pi x2
+* SDR dongle
+* Bresser 5 in 1 weather station (MPN: 7002510)
+
 ### Setup server
 First download the setup_server.sh file.
 ```
