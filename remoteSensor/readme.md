@@ -7,5 +7,6 @@ Part list:
 * DHT11
 * Voltage regulator
 * Micro usb connector
+* resistor 10k
 
 ![Images_remoteSensor](images/remotesensor.jpg)
