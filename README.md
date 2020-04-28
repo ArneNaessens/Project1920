@@ -1,6 +1,7 @@
 # Project1920
 ## Intoducton
-This is our project for the curriculum Project at Odisee Hogeschool (GHENT).
+
+This is the end result for the course project at Odisee Hogeschool (GHENT).
 
 Made by
 * Gregory Martens
