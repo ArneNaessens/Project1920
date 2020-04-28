@@ -12,7 +12,7 @@ Made by
 ## Instalation
 For this project you need two servers. We recommend to use an rasberry pi as client server.
 
-###Setup server
+### Setup server
 First download the setup_server.sh file.
 ```
 wget https://link
@@ -20,7 +20,7 @@ cd Project1920
 chmod +x setup_server.sh
 ./setup_server.sh
 ```
-###Setup client
+### Setup client
 First download the setup_client.sh file.
 ```
 wget https://link
