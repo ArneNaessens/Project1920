@@ -24,6 +24,6 @@ First download the setup_client.sh file.
 ```
 wget https://link
 cd Project1920
-chmod +x setup_clientr.sh
+chmod +x setup_client.sh
 ./setup_client.sh
 ```
