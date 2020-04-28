@@ -9,7 +9,7 @@ Made by
 * Jaimy Schatteman
 
 ## Instalation
-For this project you need two servers. We recommand to use an rasberry pi as client server.
+For this project you need two servers. We recommend to use an rasberry pi as client server.
 
 ###Setup server
 First download the setup_server.sh file.
