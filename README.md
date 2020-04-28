@@ -1,5 +1,5 @@
 # Project1920
-## Intoducton
+## Introducton
 
 This is the end result for the course project at Odisee Hogeschool (GHENT).
 
