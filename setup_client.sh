@@ -23,9 +23,9 @@ fi
 mainmenu_selection=$(whiptail --title "Main Menu" --menu --notags \
 	"" 20 78 12 -- \
 	"rtl_sdr" "Install RTL SDR support" \
-	"rtl_433" "Install required packages" \
+	"rtl_433" "Install rtl 433 package" \
 	"setting" "MQTT credentials" \
-	"startstop" "Start/stop service" \
+	"start" "Start service" \
 	3>&1 1>&2 2>&3)
 
 case $mainmenu_selection in
@@ -80,6 +80,10 @@ case $mainmenu_selection in
 	' sudo tee -a /etc/supervisor/conf.d/rtl_433.conf
 	sudo mkdir /var/log/rtl_433
 	sudo service supervisor start
+;;
+
+"start")
+	sudo systemctl start stweather.service
 ;;
 
 *) ;;
