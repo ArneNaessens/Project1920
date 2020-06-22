@@ -42,9 +42,9 @@ case $mainmenu_selection in
     sudo ldconfig
     cd ~ || return
     sudo cp ./rtl-sdr/rtl-sdr.rules /etc/udev/rules.d/
-    sudo "blacklist dvb_usb_rtl28xxu
+    "blacklist dvb_usb_rtl28xxu
     blacklist rtl2832
-    blacklist rtl2830" sudo tee -a /etc/modprobe.d/no-rtl.conf
+    blacklist rtl2830" >> /etc/modprobe.d/no-rtl.conf
 
 	if (whiptail --title "Restart Required" --yesno "It is recommended that you restart you device now. Select yes to do so now" 20 78); then
 		sudo reboot
