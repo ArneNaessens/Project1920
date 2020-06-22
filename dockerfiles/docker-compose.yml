@@ -45,7 +45,6 @@ mosquitto:
     - 9001:9001
   volumes:
     - /srv/docker/mosquitto/data:/mosquitto/data
-    #      - /srv/docker/mosquitto/config:/mosquitto/config/mosquitto.conf
     - /srv/docker/mosquitto/log:/mosquitto/log
 
 telegraf:
