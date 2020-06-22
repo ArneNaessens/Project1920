@@ -24,7 +24,6 @@ mainmenu_selection=$(whiptail --title "Main Menu" --menu --notags \
 	"" 20 78 12 -- \
 	"rtl_sdr" "Install RTL SDR support" \
 	"rtl_433" "Install rtl 433 package" \
-	"setting" "MQTT credentials" \
 	"start" "Start service" \
 	3>&1 1>&2 2>&3)
 
